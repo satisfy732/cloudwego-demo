@@ -8,6 +8,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"github.com/cloudwego/biz-demo/gomall/app/user/model"
+	"gorm.io/plugin/opentelemetry/tracing"
 	
 )
 
@@ -17,7 +18,7 @@ var (
 )
 
 func Init() {
-	fmt.Println("4")
+	
 	fmt.Println("Generated HOST:",os.Getenv("MYSQL_HOST"))
 	fmt.Printf("ok")
 	dsn := fmt.Sprintf(
@@ -33,6 +34,9 @@ func Init() {
 			SkipDefaultTransaction: true,
 		},
 	)
+	if err := DB.Use(tracing.NewPlugin(tracing.WithoutMetrics())); err != nil {
+		panic(err)
+	}
 	DB.AutoMigrate(&model.User{})
 	if err != nil {
 		panic(err)

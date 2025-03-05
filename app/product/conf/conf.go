@@ -1,15 +1,18 @@
 package conf
 
 import (
-	"io/ioutil"
+	
 	"os"
-	"path/filepath"
+
 	"sync"
 
 	"github.com/cloudwego/kitex/pkg/klog"
+	"path/filepath"
+
+	"io/ioutil"
 	"github.com/kr/pretty"
+	yaml "sigs.k8s.io/yaml/goyaml.v2"
 	"gopkg.in/validator.v2"
-	"gopkg.in/yaml.v2"
 )
 
 var (
@@ -44,6 +47,7 @@ type Kitex struct {
 	LogMaxSize    int    `yaml:"log_max_size"`
 	LogMaxBackups int    `yaml:"log_max_backups"`
 	LogMaxAge     int    `yaml:"log_max_age"`
+	MetricsPort   string `yaml:"metrics_port"`
 }
 
 type Registry struct {
@@ -78,7 +82,6 @@ func initConf() {
 	conf.Env = GetEnv()
 	pretty.Printf("%+v\n", conf)
 }
-
 func GetEnv() string {
 	e := os.Getenv("GO_ENV")
 	if len(e) == 0 {

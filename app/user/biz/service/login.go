@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"errors"
-	user "github.com/cloudwego/biz-demo/gomall/rpc_gen/kitex_gen/user"
+	"github.com/cloudwego/biz-demo/gomall/rpc_gen/kitex_gen/user"
 	"github.com/cloudwego/biz-demo/gomall/app/user/model"
 	"github.com/cloudwego/biz-demo/gomall/app/user/biz/dal/mysql"
 	"golang.org/x/crypto/bcrypt"

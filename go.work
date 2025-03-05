@@ -2,5 +2,11 @@ go 1.23.5
 
 use (
 	.
+	./app/cart
+	./app/checkout
+	./app/email
+	./app/order
+	./app/payment
 	./app/user
+	./common
 )

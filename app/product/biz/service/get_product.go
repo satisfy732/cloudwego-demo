@@ -3,10 +3,11 @@ package service
 import (
 	"context"
 
+	"github.com/cloudwego/biz-demo/gomall/app/product/biz/dal/mysql"
 	"github.com/cloudwego/biz-demo/gomall/app/product/biz/model"
 	product "github.com/cloudwego/biz-demo/gomall/app/product/kitex_gen/product"
 	"github.com/cloudwego/kitex/pkg/kerrors"
-	"github.com/cloudwego/biz-demo/gomall/app/product/biz/dal/mysql"
+	"github.com/cloudwego/biz-demo/gomall/app/product/biz/dal/redis"
 )
 
 type GetProductService struct {
@@ -22,7 +23,7 @@ func (s *GetProductService) Run(req *product.GetProductReq) (resp *product.GetPr
 	if req.Id == 0{
 		return nil,kerrors.NewGRPCBizStatusError(2004001,"product id is required")
 	}
-	productQuery := model.NewProductQuery(s.ctx,mysql.DB)
+	productQuery := model.NewCachedProductQuery(s.ctx,mysql.DB,redis.RedisClient)
 	p,err := productQuery.GetById(int(req.Id))
 	if err != nil {
 		return nil,err
