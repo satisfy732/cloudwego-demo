@@ -24,6 +24,4 @@ func (s *EmptyCartService) Run(req *cart.EmptyCartReq) (resp *cart.EmptyCartResp
 	}
 
 	return &cart.EmptyCartResp{}, nil
-
-	
 }
