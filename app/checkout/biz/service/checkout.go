@@ -127,10 +127,7 @@ if err != nil {
     fmt.Printf("Failed to publish message: %v", err)
 } else {
     fmt.Println("Message published successfully")
-}
-
-
-	
+}	
 	klog.Info(paymentResult)
 
 
